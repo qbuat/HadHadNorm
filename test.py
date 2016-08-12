@@ -37,7 +37,6 @@ for ip, frac in enumerate(my_frac_range):
     print 'total data = ', h_pseudo_data.Integral()
     fitter = norm_fitter(h_pseudo_data, template.real, template.realfake, template.fakefake)
     fitter.fit(constant_others=False)
-    print fitter.fitres
     fitter.fitres.Print('v')
     print fitter.n_real, fitter.n_real_err, '/', n_z
     res_z.SetPoint(ip, float(frac), fitter.n_real / n_z)
@@ -79,11 +78,11 @@ h_data = data.make_pseudo_data()
 
 
 Fit = norm_fitter(h_data, template.real, template.realfake, template.fakefake)
-res = Fit.fit(constant_others=True)
+res = Fit.fit(constant_others=False)
 fitter.fitres.Print('v')
-print Fit.n_real, Fit.n_real_err, n_real_target
-print Fit.n_realfake, Fit.n_realfake_err, n_realfake_target
-print Fit.n_fakefake, Fit.n_fakefake_err, n_fakefake_target
+# print Fit.n_real, Fit.n_real_err, n_real_target
+# print Fit.n_realfake, Fit.n_realfake_err, n_realfake_target
+# print Fit.n_fakefake, Fit.n_fakefake_err, n_fakefake_target
 
 plot1 = Fit.frame('tau1_score')
 plot2 = Fit.frame('tau2_score')

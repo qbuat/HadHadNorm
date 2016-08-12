@@ -5,10 +5,18 @@ class norm_fitter(object):
 
     def __init__(self, h_data, h_real, h_realfake, h_fakefake):
         
+        self._xmin_1 = h_real.GetXaxis().GetBinLowEdge(1)
+        self._xmax_1 = h_real.GetXaxis().GetBinLowEdge(h_real.GetNbinsX() + 1)
+
+        self._xmin_2 = h_real.GetYaxis().GetBinLowEdge(1)
+        self._xmax_2 = h_real.GetYaxis().GetBinLowEdge(h_real.GetNbinsX() + 1)
+
         self.tau1_score = ROOT.RooRealVar(
-            "tau1_score", "#tau_{1} BDT Score", 0, 1)
+            "tau1_score", "#tau_{1} BDT Score", 
+            self._xmin_1, self._xmax_1)
         self.tau2_score = ROOT.RooRealVar(
-            "tau2_score", "#tau_{2} BDT Score", 0, 1)
+            "tau2_score", "#tau_{2} BDT Score",
+            self._xmin_2, self._xmax_2)
 
         ## input data
         self.data = ROOT.RooDataHist(
@@ -119,8 +127,11 @@ class norm_fitter(object):
     def frame(self, var='tau1_score'):
         """
         """
-        plot = getattr(self, var).frame(0, 1, 10)
-        plot.SetName('tau1_score')
+        roo_var = getattr(self, var)
+        plot = roo_var.frame(
+            roo_var.getBinning().lowBound(), 
+            roo_var.getBinning().highBound(), 10)
+        plot.SetName(var)
 
         self.data.plotOn(
             plot, ROOT.RooFit.Name('Data'),
