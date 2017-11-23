@@ -70,12 +70,36 @@ class Data(object):
         return h_d
 
     def plot(self):
-        plot = ROOT.TCanvas('data', 'data')
-        plot.Divide(2, 2)
-        plot.cd(1)
+        plot = ROOT.TCanvas('data', 'data', 1200, 400)
+        plot.Divide(3, 1)
+        pad = plot.cd(1)
         self._real.Draw('colz')
-        plot.cd(2)
+        ttext_1 = ROOT.TLatex(
+            pad.GetLeftMargin() + 0.01,
+            1 - pad.GetTopMargin() + 0.02, 
+            "Z#rightarrow#tau#tau")
+        ttext_1.SetNDC(True)
+        ttext_1.SetTextSize(15)
+        ttext_1.Draw()
+
+        pad = plot.cd(2)
         self._realfake.Draw('colz')
-        plot.cd(3)
+        ttext_2 = ROOT.TLatex(
+            pad.GetLeftMargin() + 0.01,
+            1 - pad.GetTopMargin() + 0.02, 
+            "Others")
+        ttext_2.SetNDC(True)
+        ttext_2.SetTextSize(15)
+        ttext_2.Draw()
+
+        pad = plot.cd(3)
         self._fakefake.Draw('colz')
+        self._realfake.Draw('colz')
+        ttext_3 = ROOT.TLatex(
+            pad.GetLeftMargin() + 0.01,
+            1 - pad.GetTopMargin() + 0.02, 
+            "Fake")
+        ttext_3.SetNDC(True)
+        ttext_3.SetTextSize(15)
+        ttext_3.Draw()
         plot.SaveAs('dump/input.pdf')

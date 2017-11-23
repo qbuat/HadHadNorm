@@ -62,6 +62,7 @@ c_yields = yields_plot(
 c_yields.Update()    
 c_yields.SaveAs('dump/yields.pdf')
 
+
 # For now it's pseudo data
 n_real_target = 10000
 n_realfake_target = 20000
