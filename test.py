@@ -64,9 +64,9 @@ c_yields.SaveAs('dump/yields.pdf')
 
 
 # For now it's pseudo data
-n_real_target = 10000
-n_realfake_target = 20000
-n_fakefake_target = 50000
+n_real_target = 4000
+n_realfake_target = 2000
+n_fakefake_target = 8000
 
 data = Data()
 data.create_templates(
