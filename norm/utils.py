@@ -111,3 +111,27 @@ def yields_plot(fit_z, fit_fakes, exp_z, exp_fakes, ntot):
     legend.Draw()
     c_resp.RedrawAxis()
     return c_resp
+
+
+
+def stack_2d(a, b, c):
+    
+    a.SetLineColor(ROOT.kBlue)
+    a.SetFillColor(ROOT.kBlue)
+
+    b.SetLineColor(ROOT.kViolet)
+    b.SetFillColor(ROOT.kViolet)
+
+    c.SetLineColor(ROOT.kRed)
+    c.SetFillColor(ROOT.kRed)
+
+
+    stack = ROOT.THStack()
+    for h in (a, b, c):
+        stack.Add(h)
+
+    c = ROOT.TCanvas(uuid.uuid4().hex, '', 1000, 1000)
+    stack.Draw()
+    stack.GetXaxis().SetTitle(a.GetXaxis().GetTitle())
+    stack.GetYaxis().SetTitle(a.GetYaxis().GetTitle())
+    return c

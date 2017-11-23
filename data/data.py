@@ -94,7 +94,6 @@ class Data(object):
 
         pad = plot.cd(3)
         self._fakefake.Draw('colz')
-        self._realfake.Draw('colz')
         ttext_3 = ROOT.TLatex(
             pad.GetLeftMargin() + 0.01,
             1 - pad.GetTopMargin() + 0.02, 

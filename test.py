@@ -3,7 +3,7 @@ from rootpy.plotting.style import set_style
 from data import Data
 from norm.norm import norm_fitter
 from norm.utils import get_response_graph, response_plot, yields_plot, decorated_plot
-
+from norm.utils import stack_2d
 
 # Create templates from pseudo data
 N = int(2e6)
@@ -97,4 +97,6 @@ pad2.Update()
 pad2.SaveAs('dump/2dfit_tau2_score.pdf')
 
 
+plot3 = stack_2d(template.real, template.realfake, template.fakefake)
+plot3.SaveAs('dump/stack_2d.pdf')
 
